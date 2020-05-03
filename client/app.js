@@ -15,12 +15,14 @@ app.loader.add('tankImage','/images/tank.png').load(setup)
 // inject into div of html
 document.querySelector('#game').appendChild(app.view)
 
-let state
+let state 
+let bullets = []
 function setup() {
 
   //Create the `cat` sprite 
   tank = new PIXI.Sprite(app.loader.resources["tankImage"].texture);
-  tank.y = 96; 
+  tank.anchor.y = 0.5; 
+  tank.anchor.x = 0.5
   tank.vx = 0;
   tank.vy = 0;
   app.stage.addChild(tank);
@@ -29,7 +31,18 @@ function setup() {
   let left = keyboard("ArrowLeft"),
       up = keyboard("ArrowUp"),
       right = keyboard("ArrowRight"),
-      down = keyboard("ArrowDown");
+      down = keyboard("ArrowDown"),
+      space = keyboard(" ");
+  space.press = () => {
+      
+    let temp = new PIXI.Graphics()
+    temp.beginFill(0xFFCC00, 1)
+    temp.drawCircle(tank.x,tank.y,2)
+    temp.endFill()
+     
+      bullets.push(temp)
+      app.stage.addChild(temp)
+  }    
 
   //Left arrow key `press` method
   left.press = () => {
@@ -99,4 +112,5 @@ function play(delta) {
   //Use the tank's velocity to make it move
   tank.x += tank.vx;
   tank.y += tank.vy
+  bullets.forEach((bullet)=>{bullet.y += 2})
 }
