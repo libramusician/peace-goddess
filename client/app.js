@@ -40,8 +40,13 @@ function setup() {
     temp.drawCircle(tank.x,tank.y,2)
     temp.endFill()
      
+<<<<<<< HEAD
     bullets.push(temp)
     app.stage.addChild(temp)
+=======
+      bullets.push(temp)
+      app.stage.addChild(temp)
+>>>>>>> aaa
   }    
 
   //Left arrow key `press` method
