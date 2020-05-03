@@ -40,8 +40,8 @@ function setup() {
     temp.drawCircle(tank.x,tank.y,2)
     temp.endFill()
      
-      bullets.push(temp)
-      app.stage.addChild(temp)
+    bullets.push(temp)
+    app.stage.addChild(temp)
   }    
 
   //Left arrow key `press` method
@@ -108,7 +108,6 @@ function gameLoop(delta){
 }
 
 function play(delta) {
-
   //Use the tank's velocity to make it move
   tank.x += tank.vx;
   tank.y += tank.vy
