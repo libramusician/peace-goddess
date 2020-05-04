@@ -25,6 +25,9 @@ function setup() {
   tank.anchor.x = 0.5
   tank.vx = 0;
   tank.vy = 0;
+  tank.x = 250
+  tank.y = 450;
+  let direction = 'U'; 
   app.stage.addChild(tank);
 
   //Capture the keyboard arrow keys
@@ -40,8 +43,26 @@ function setup() {
     temp.drawCircle(tank.x,tank.y,2)
     temp.endFill()
      
-      bullets.push(temp)
-      app.stage.addChild(temp)
+    switch(direction){
+      case 'U': 
+        temp.vy = -2;
+        temp.vx = 0;
+        break;
+      case 'L': 
+        temp.vx = -2;
+        temp.vy = 0;
+        break;
+      case 'D': 
+        temp.vy = 2;
+        temp.vx = 0;
+        break;
+      case 'R': 
+        temp.vx = 2;
+        temp.vy = 0;
+        break;
+    }
+    bullets.push(temp)
+    app.stage.addChild(temp)     
   }    
 
   //Left arrow key `press` method
@@ -49,7 +70,11 @@ function setup() {
     //Change the cat's velocity when the key is pressed
     tank.vx = -5;
     tank.vy = 0;
-  };
+    tank.rotation=-1.57;
+    direction = 'L';  
+   };
+    
+    
   
   //Left arrow key `release` method
   left.release = () => {
@@ -65,6 +90,8 @@ function setup() {
   up.press = () => {
     tank.vy = -5;
     tank.vx = 0;
+    tank.rotation=0; 
+    direction = 'U'; 
   };
   up.release = () => {
     if (!down.isDown && tank.vx === 0) {
@@ -76,6 +103,8 @@ function setup() {
   right.press = () => {
     tank.vx = 5;
     tank.vy = 0;
+    tank.rotation=1.57 
+    direction = 'R'; 
   };
   right.release = () => {
     if (!left.isDown && tank.vy === 0) {
@@ -87,6 +116,8 @@ function setup() {
   down.press = () => {
     tank.vy = 5;
     tank.vx = 0;
+    tank.rotation=3.14
+    direction = 'D'; 
   };
   down.release = () => {
     if (!up.isDown && tank.vx === 0) {
@@ -108,9 +139,12 @@ function gameLoop(delta){
 }
 
 function play(delta) {
-
   //Use the tank's velocity to make it move
   tank.x += tank.vx;
-  tank.y += tank.vy
-  bullets.forEach((bullet)=>{bullet.y += 2})
+  tank.y += tank.vy;
+  
+  bullets.forEach((bullet)=>{
+    bullet.y += bullet.vy;
+    bullet.x += bullet.vx;
+  })
 }
