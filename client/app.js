@@ -34,7 +34,6 @@ const createTank = (sprite,agent,x,y)=>{
     circle.drawCircle(2,2,2)
     circle.endFill()
     temp = new PIXI.Sprite(app.renderer.generateTexture(circle))
-    console.log('anchor offset',temp.width,temp.height)
 
     temp.x=tank.x
     temp.y=tank.y
@@ -64,7 +63,6 @@ const createTank = (sprite,agent,x,y)=>{
       default:
         console.log('wrong dir')
     }
-    console.log(temp.x,temp.y)
     bullets.push(temp)
     app.stage.addChild(temp)
   }
@@ -157,7 +155,6 @@ function play(delta) {
     bullet.x += bullet.vx;
     if(bullet.x<-5 || bullet.x>gameWidth+5 || bullet.y<-5 || bullet.y>gameHeight+5){
       bullet.markForRemoval = true
-      console.log(bullet.x,bullet.y)
     }
   })
   //remove bullets from stage
