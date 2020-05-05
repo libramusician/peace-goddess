@@ -1,7 +1,7 @@
 const PIXI = require('pixi.js');
 const UserAgent = require('./game/agent/userAgent')
 const RandomAgent = require('./game/agent/randomAgent')
-const keyboard = require('./key').keyboard;
+
 const gameWidth = 512
 const gameHeight = 512
 // The application will create a renderer using WebGL, if possible,
@@ -85,8 +85,9 @@ function setup() {
   let player = createTank(
     new PIXI.Sprite(app.loader.resources["tankImage"].texture),
     new UserAgent("ArrowLeft","ArrowRight","ArrowUp","ArrowDown"," "))
-  //let robot1 = createTank(new PIXI.Sprite(app.loader.resources["tankImage"].texture),new RandomAgent())
+  let robot1 = createTank(new PIXI.Sprite(app.loader.resources["tankImage"].texture),new RandomAgent(20))
   tanks.push(player)
+  tanks.push(robot1)
   // load tanks
   for(let tank of tanks){
     app.stage.addChild(tank);
