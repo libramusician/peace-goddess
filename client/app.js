@@ -79,7 +79,31 @@ app.loader.add('tankImage','/images/tank.png').load(setup)
 
 // inject into div of html
 document.querySelector('#game').appendChild(app.view)
+function testInside (point,obj){
+    let x = point.x,
+        y = point.y;
+    if (x>obj.x-obj.width/2
+     && x<obj.x+obj.width/2
+     && y<obj.y+obj.height/2
+     && y>obj.y-obj.height/2)
+     {return true;}
+     else{return false;}
+  }
+  function hit (obj1,obj2){
+    let upleft = {x:obj1.x-obj1.width/2,
+                  y:obj1.y-obj1.height/2};
+    let upright = {x:obj1.x+obj1.width/2,
+                  y:obj1.y-obj1.height/2};
+    let downleft = {x:obj1.x-obj1.width/2,
+                  y:obj1.y+obj1.height/2};
+    let downright = {x:obj1.x+obj1.width/2,
+                    y:obj1.y+obj1.height/2};
 
+    return (testInside(upleft,obj2)
+    ||testInside(upright,obj2)
+    ||testInside(downleft,obj2)
+    ||testInside(downright,obj2))
+  }
 let state 
 function setup() {
   let player = createTank(
@@ -106,6 +130,7 @@ function gameLoop(delta){
 }
 
 function play(delta) {
+  if (hit(tanks[0],tanks[1])){console.log("haha")};
   //update tank
   tanks.forEach((tank)=>{
     // handle action (four directions)
@@ -164,4 +189,6 @@ function play(delta) {
   })
   //shorten the list
   bullets = bullets.filter(bullet=>!bullet.markForRemoval)
+  
+  
 }

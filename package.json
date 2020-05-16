@@ -22,7 +22,8 @@
   "homepage": "https://github.com/libramusician/peace-goddess#readme",
   "devDependencies": {
     "browserify": "^16.5.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
   },
   "dependencies": {
     "pixi.js": "^5.2.3"
