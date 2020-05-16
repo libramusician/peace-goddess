@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && node server/app.js",
-    "build": "browserify client/app.js -o client/public/js/app.js"
+    "build": "browserify client/app.js -o client/public/js/app.js",
+    "watch": "nodemon --ignore client/public/js/app.js --exec npm start"
   },
   "repository": {
     "type": "git",
